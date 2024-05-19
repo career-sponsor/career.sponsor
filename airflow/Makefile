@@ -1,10 +1,7 @@
 IMAGE_NAME=bgpark82/uk-company-airflow
 TAG=latest
 
-.PHONY: build tag push
-
-docker push:
-	makefile build tag push
+deploy: build tag push
 
 build:
 	docker build -t $(IMAGE_NAME):$(TAG) .
@@ -14,3 +11,6 @@ tag:
 
 push:
 	docker push $(IMAGE_NAME):$(TAG)
+
+local:
+	docker-compose -f docker-compose-local.yml up -d

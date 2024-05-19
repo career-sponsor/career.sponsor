@@ -1,24 +1,28 @@
-# README
+# Web
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation 
+1. build and deploy image to Docker Hub (local, prod)
+- Makefile in web directory
+```bash
+make deploy
+```
 
-Things you may want to cover:
+## Run
+1. run web-deployment.yml (local, prod)
+- Makefile in project root directory
+```bash
+make web-deploy
+```
 
-* Ruby version
+2. port forward (prod)
+- Makefile in project root directory
+- it must have --address 0.0.0.0 option for ec2 instance 
+```bash
+make web-pf
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+deprecated
+```bash
+make run # docker
+make local # local 
+```

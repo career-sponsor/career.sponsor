@@ -4,17 +4,22 @@ using ZincSearch
 - https://zincsearch-docs.zinc.dev/
 
 ## Run
+1. run zincsearch-deployment.yml (local, prod)
+- Makefile in project root directory
 ```bash
-make start
+make zs-deploy
 ```
+
+2. port forward (prod)
+- Makefile in project root directory
+- it must have --address 0.0.0.0 option for ec2 instance
+```bash
+make zs-pf
+```
+
 http://localhost:4080
 
-## Import sample
+deprecated
 ```bash
-curl -L https://github.com/zincsearch/zincsearch/releases/download/v0.1.1/olympics.ndjson.gz -o olympics.ndjson.gz
-gzip -d  olympics.ndjson.gz 
-```
-bulk insert
-```bash
-curl http://localhost:4080/api/_bulk -i -u admin --data-binary "@olympics.ndjson"
+make start # run on local
 ```

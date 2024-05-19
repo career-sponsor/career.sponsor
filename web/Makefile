@@ -16,7 +16,7 @@ inspect:
 	docker image inspect $(IMAGE_NAME):$(TAG)
 
 run:
-	docker run -p 3000:3000 $(APP_NAME)
+	docker run -p 3000:3000 $(IMAGE_NAME):$(TAG)
 
 local:
 	rails server
