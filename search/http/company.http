@@ -1,5 +1,5 @@
 ### search document
-POST http://localhost:4080/api/companies/_search
+POST {{host}}/api/companies/_search
 Content-Type: application/json
 Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
@@ -16,7 +16,7 @@ Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 }
 
 ### create index
-POST http://localhost:4080/api/index
+POST {{host}}/api/index
 Content-Type: application/json
 Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
@@ -73,7 +73,7 @@ Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 }
 
 ### create document
-POST http://localhost:4080/api/companies/_doc
+POST {{host}}/api/companies/_doc
 Content-Type: application/json
 Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
@@ -87,7 +87,7 @@ Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
 ### create bulk document
 ### https://zincsearch-docs.zinc.dev/api/document/bulkv2/
-POST http://localhost:4080/api/_bulkv2
+POST {{host}}/api/_bulkv2
 Content-Type: application/json
 Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
