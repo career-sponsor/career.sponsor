@@ -4,7 +4,7 @@ TAG=latest
 deploy: build tag push
 
 build:
-	docker build -t $(IMAGE_NAME):$(TAG) .
+	docker build --platform="linux/amd64" -t $(IMAGE_NAME):$(TAG) .
 
 tag:
 	docker tag $(IMAGE_NAME):$(TAG) $(IMAGE_NAME):$(TAG)
