@@ -12,6 +12,9 @@ tag:
 push:
 	docker push $(IMAGE_NAME):$(TAG)
 
+inspect:
+	docker image inspect $(IMAGE_NAME):$(TAG)
+
 run:
 	docker run -p 3000:3000 $(APP_NAME)
 

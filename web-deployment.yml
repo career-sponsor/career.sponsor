@@ -20,7 +20,9 @@ spec:
           command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
           ports:
             - containerPort: 3000
-#          env:
+          env:
+            - name: DOCKER_DEFAULT_PLATFORM
+              value: "linux/amd64"
 #            - name: DATABASE_URL
 #              value: "postgres://postgres:password@db:5432/myapp_development"
 #          volumeMounts:
