@@ -1,0 +1,3 @@
+
+start:
+	ZINC_FIRST_ADMIN_USER=admin ZINC_FIRST_ADMIN_PASSWORD=Complexpass#123 ZINC_PROMETHEUS_ENABLE=true zincsearch

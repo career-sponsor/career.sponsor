@@ -1,0 +1,75 @@
+### create index
+POST http://localhost:4080/api/index
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "name": "article",
+  "storage_type": "disk",
+  "shard_num": 1,
+  "mappings": {
+    "properties": {
+      "title": {
+        "type": "text",
+        "index": true,
+        "store": true,
+        "highlightable": true
+      },
+      "content": {
+        "type": "text",
+        "index": true,
+        "store": true,
+        "highlightable": true
+      },
+      "status": {
+        "type": "keyword",
+        "index": true,
+        "sortable": true,
+        "aggregatable": true
+      },
+      "publish_date": {
+        "type": "date",
+        "format": "2006-01-02T15:04:05Z07:00",
+        "index": true,
+        "sortable": true,
+        "aggregatable": true
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "type": "standard"
+        },
+        "my_analyzer": {
+          "tokenizer": "standard",
+          "char_filter": [
+            "my_mappings_char_filter"
+          ]
+        }
+      },
+      "char_filter": {
+        "my_mappings_char_filter": {
+          "type": "mapping",
+          "mappings": [
+            ":) => _happy_",
+            ":( => _sad_"
+          ]
+        }
+      }
+    }
+  }
+}
+
+### create index
+POST http://localhost:4080/api/article/_doc
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "title": "hello guys",
+  "content": "My name is byeonggil park. I am 34 years old and from South Korea",
+  "status": "programmer",
+  "publish_date": "2006-01-02T15:04:05Z"
+}

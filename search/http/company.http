@@ -1,0 +1,1912 @@
+### search document
+POST http://localhost:4080/api/companies/_search
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "search_type": "match",
+  "query": {
+    "term": "Limited",
+    "field": "_all"
+  },
+  "from": 0,
+  "max_results": 20,
+  "_source": [
+  ]
+}
+
+### create index
+POST http://localhost:4080/api/index
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "name": "companies",
+  "storage_type": "disk",
+  "shard_num": 1,
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "index": true,
+        "store": true,
+        "highlightable": true
+      },
+      "city": {
+        "type": "text",
+        "index": true,
+        "store": true,
+        "highlightable": true
+      },
+      "county": {
+        "type": "text",
+        "index": true,
+        "sortable": true,
+        "highlightable": true
+      },
+      "type": {
+        "type": "keyword",
+        "index": true,
+        "sortable": true,
+        "aggregatable": true
+      },
+      "route": {
+        "type": "keyword",
+        "index": true,
+        "sortable": true,
+        "aggregatable": true
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "default": {
+          "type": "standard"
+        },
+        "my_analyzer": {
+          "tokenizer": "standard"
+        }
+      }
+    }
+  }
+}
+
+### create document
+POST http://localhost:4080/api/companies/_doc
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "name": "Aldi Stores Limited",
+  "city": "Atherstone",
+  "county": "Warwickshire",
+  "type": "Worker (A rating)",
+  "route": "Global Business Mobility: Senior or Specialist Worker"
+}
+
+### create bulk document
+### https://zincsearch-docs.zinc.dev/api/document/bulkv2/
+POST http://localhost:4080/api/_bulkv2
+Content-Type: application/json
+Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
+
+{
+  "index": "companies",
+  "records": [
+    {
+      "name": " McMullan Shellfish",
+      "city": "Ballymena",
+      "county": "Co Antrim",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": " RSS EXPRESS LTD T/A  Ledbury Fuel Service Station",
+      "city": "Ledbury",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "(IECC Care) Independent Excel Care Consortium Limited",
+      "city": "Colchester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "*ABOUTCARE HASTINGS LTD",
+      "city": "East Sussex",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "???\u00a3 ESS LTD",
+      "city": "Manchester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "@ Architect UK Ltd",
+      "city": "West Horndon",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "@ Home Accommodation Services Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "@ Home Accommodation Services Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "@ Ur Eaz Ltd",
+      "city": "High Wycombe",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "@@@ FILER LIMITED",
+      "city": "Bolton",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "[AI] INFINITI LIMITED",
+      "city": "Croydon",
+      "county": "England",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "`Brunswick Stores Limited",
+      "city": " Leamington Spa",
+      "county": "Warwickshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "+Plus Care Ltd",
+      "city": "Manchester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "0022IT Ltd",
+      "city": "Farnham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "0022Media Ltd",
+      "city": "Brighton",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "0022Media Ltd",
+      "city": "Brighton",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "003 Ltd",
+      "city": "Hounslow",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "0086 Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "00Nation Limited",
+      "city": "London",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: Senior or Specialist Worker"
+    },
+    {
+      "name": "00Nation Limited",
+      "city": "London",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "01 ACCOUNTING SERVICES LTD",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "012 Global Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "023 LTD",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "09 Care Limited",
+      "city": "Bradford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "0xA Technologies Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 ACE TRAINING LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 ALS LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 AND 1 ROUGAMO LIMITED",
+      "city": "Cambridge",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 And 5 Tech Ltd",
+      "city": "Slough",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Answer Insurance Services LTD.",
+      "city": "Polegate",
+      "county": "East Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Bishops Avenue Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Diamond Homecare Limited",
+      "city": "Pontefract",
+      "county": "West Yorkshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Digitals Europe Limited",
+      "city": "Slough",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Eclipse Care Solutions Limited",
+      "city": "Barking",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Green Foods Ltd",
+      "city": "Northolt",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Homecare ltd",
+      "city": "PRESTON",
+      "county": "Lancashire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Indus Limited",
+      "city": "Bath",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Key Solution Limited",
+      "city": "Leicester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Kings Dental Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Life London Limited",
+      "city": "Streatham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 MODEL MANAGEMENT LONDON LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "1 Oak Home Care",
+      "city": "Sudbury",
+      "county": "Suffolk",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Oak Leisure Ireland Ltd",
+      "city": "Cookstown",
+      "county": "Tyrone",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 PhysioUK Limited",
+      "city": "Milton Keynes",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 Stop Print Ltd",
+      "city": "Ilford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1 STOP REC LIMITED",
+      "city": "ESSEX",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10 Europe Limited",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10 Europe Limited",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: Senior or Specialist Worker"
+    },
+    {
+      "name": "100 Percent Cornwall Ltd",
+      "city": "Truro",
+      "county": "Cornwall",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "100 SHAPES LTD",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "100% HALAL MEAT STORES LTD",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1000 Trades Limited",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1000heads Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "100Starlings Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "101 A+D Ltd.",
+      "city": "Bristol",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "101 Harley Street LTD",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "101 Healthcare ltd",
+      "city": "Gloucester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "101 Ways Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1010 Restaurant @ The Blacksmiths arms",
+      "city": "Billingshurst",
+      "county": "West Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "105 West Architects Ltd",
+      "city": "Bristol",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1066 PLUMBING AND HEATING LTD",
+      "city": "St. Leonards-On-Sea,",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "107 Cannon Street Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10748954",
+      "city": "Graffham, Petworth",
+      "county": "West Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "108 Media Ltd",
+      "city": "Richmond",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1080 Properties Ltd",
+      "city": "Kent",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10architect Ltd",
+      "city": "Manchester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10BE5 LTD.",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10BIT FX LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10BIT FX LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "10Pearls Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "10X Banking Technology Services Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11 BERKELEY STREET LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11 Hospitality Limited T/A Holiday Inn Birmingham Airport NEC",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11:FS GROUP LIMITED",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "111 By Nico Ltd",
+      "city": "Glasgow",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "111 Skin Limited",
+      "city": "London",
+      "county": "Fritzovia",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "114 GPS Ltd  T/A Sushi Atelier",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1177 Retail Limited",
+      "city": "Portsmouth",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11and12 Limited",
+      "city": "Hinckley",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11Eleven UK Enterprises Ltd",
+      "city": "Bristol",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11K Consulting Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11PCS Consultancy Limited",
+      "city": "Coulsdon",
+      "county": "Surrey",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11Plus Teacher Ltd",
+      "city": "Chelmsford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "11x Limited",
+      "city": "London",
+      "county": "n1",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1-2 Call Cars Ltd",
+      "city": "Hampshire",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "12.18 Roxburghe Hotel Golf & Spa Ltd",
+      "city": "Heiton by Kelso",
+      "county": "Roxburghe",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1212 AFRO CARIBBEAN FOOD",
+      "city": "NOTTINGHAM",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1214 Construction",
+      "city": "Bradford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "123 E-Filing Limited",
+      "city": "Bolton",
+      "county": "Lancashire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "123 Insight Limited",
+      "city": "Durely",
+      "county": "Southampton",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "123 Tech Ltd",
+      "city": "Whitstable",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "126 Newland Avenue,",
+      "city": "Hull",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1265 Degrees North Ltd",
+      "city": "Newcastle upon Tyne",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1266 Music Group",
+      "city": "Glasgow",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "12B Solicitors Limited",
+      "city": "Greater London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "13 Artists",
+      "city": "Brighton",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "1313 Global Limited",
+      "city": "Hounslow",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1313 Grays Limited",
+      "city": "London",
+      "county": "England",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1313 Superstore Ltd",
+      "city": "Reading",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "13th Street Hospitality Ltd t/a Sunday in Brooklyn",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "14 PROMOTIONS (TRADE) LIMITED",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "14 Septembre London Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1416 DIGITAL LTD",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1423 China Kitchen Ltd",
+      "city": "Windsor",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1508 London Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "152 Harley Street Limited",
+      "city": "London",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "15below ltd",
+      "city": "Brighton",
+      "county": "East Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "15GIFTS LTD",
+      "city": "Brighton",
+      "county": "East Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "16 Barrack Ltd TA Saffron Indian Restaurant & Pizza Place",
+      "city": "Woodbridge",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "16 Plus Care Support Solutions Ltd",
+      "city": "Gloucester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "160B Consulting Ltd",
+      "city": "Dungannon",
+      "county": "Tyrone",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "168 EXPRESS LTD",
+      "city": "CALDICOT",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "16HarleyCo Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "17 Capital Services Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1708 Retail Ltd",
+      "city": "Waterlooville",
+      "county": "Hampshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "178 PARK VIEW LIMITED",
+      "city": "ORPINGTON",
+      "county": "KENT",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "178 PARK VIEW LIMITED",
+      "city": "ORPINGTON",
+      "county": "KENT",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "1783 Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "17CARE UK LTD",
+      "city": "High Wycombe",
+      "county": "Buckinghamshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "17Cicada Limited",
+      "city": "Nottingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "17TAOUK TRADE LIMITED",
+      "city": "BIRMINGHAM",
+      "county": "WEST MIDLANDS",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "18 Degrees Below Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "18 NOVEMBER LTD",
+      "city": "Ilford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "18.01 London Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "184 DISTRIBUTION LIMITED",
+      "city": "Cambridge",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "186 London Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1885 the Venue Ltd",
+      "city": "Halifax",
+      "county": "West Yorkshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "18A Charing Cross Dental Surgery",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "18APR Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "18PLUS SUPPORT LIMITED",
+      "city": "Wickford",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1905 Group Limited T/A 1905",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1910 GROUP LIMITED",
+      "city": "Kingston Upon Thames",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1953 Bar And Restaurant",
+      "city": "Galashiels",
+      "county": "Scottish Borders",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1986 The Kebab Kafe (just halal Kebabs)",
+      "city": "Sheffield",
+      "county": "South Yorkshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1A ORTHODONTICS LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1CLICK STUDIO",
+      "city": "DAGENHAM",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1D Agency Ltd T/A One Day Agency",
+      "city": "MANCHESTER",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1decision Limited",
+      "city": "Stevenage",
+      "county": "Hertfordshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1E Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1E Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: Senior or Specialist Worker"
+    },
+    {
+      "name": "1LWW CO LIMITED",
+      "city": "Nottingham,",
+      "county": "England",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1OAK CAPITAL LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ovmany ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1partCarbon Ltd",
+      "city": "Edinburgh",
+      "county": "Scotland",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1PS Group Limited",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1SA LIMITED T/A Subway",
+      "city": "Hammersmith",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1SKY LTD",
+      "city": "Oldham",
+      "county": "England",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1Spatial Group",
+      "city": "Cambridge",
+      "county": "East of England",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st 4 Healthcare LTD",
+      "city": "Preston",
+      "county": "Lancashire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST ADTUBE LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Airport Taxis LTD",
+      "city": "Luton",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST ASSIST LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CALL RECRUITMENT SERVICES LTD",
+      "city": "Stockport",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Care Limited t/as The Hawthorne Nursing Home",
+      "city": "Nottinghamshire",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Choice 24/7 Recruitment Ltd",
+      "city": "East Ham",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CHOICE ACCOUNTANTS LTD",
+      "city": "Birmingham",
+      "county": "West Midlands",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CHOICE AUTOS LTD",
+      "city": "Walsall",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CHOICE CABS LTD",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CHOICE CONSULTANCY LTD",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST CHOICE RESOURCE GRP LTD",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Choice Windows Yorkshire Ltd.",
+      "city": "Bradford",
+      "county": "West Yorkshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST Class Care Agency Ltd",
+      "city": "Prescot",
+      "county": "Merseyside",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Class Care Ltd",
+      "city": "Livingston",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Class Care Services2 Ltd",
+      "city": "Ledbury",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Class Protection Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Enable Ltd",
+      "city": "Ellesmere Port",
+      "county": "Cheshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Focus Homecare Ltd",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Fresh Foods Ltd",
+      "city": "Mitcham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Glimpse Ltd",
+      "city": "Burnham on Crouch",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Grade Care Ltd",
+      "city": "Cardiff Bay",
+      "county": "Cardiff",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Homecare Solutions Limited",
+      "city": "Leighton Buzzard",
+      "county": "Bedfordshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Line Defence Ltd",
+      "city": "Hoddesdon",
+      "county": "Hertfordshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Locate UK LTD",
+      "city": "Leeds",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Med Limited",
+      "city": "Preston",
+      "county": "Lancs",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST PERFORMANCE & EXHAUSTS LIMITED",
+      "city": "Norfolk",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Step Childcare Ltd",
+      "city": "Poplar",
+      "county": "London",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST STOP OFF-LICENCE LTD",
+      "city": "Nantwich",
+      "county": "Cheshire East",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1st Technologies Ltd",
+      "city": "Preston",
+      "county": "Lancashire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1ST VISA INTERNATIONAL LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1stavenue.co.uk Ltd",
+      "city": "Bromley",
+      "county": "Kent",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1stCurve Limited",
+      "city": "Hockley",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1stopbabystore ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1SW EVENTS LONDON LTD",
+      "city": "ALFREDS  WAY",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "1WorldSync Limited",
+      "city": "Bristol",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Agriculture Limited T/A 2 Agriculture",
+      "city": "Newbridge",
+      "county": "Midlothian",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Bro's Pizza & Dessert Ltd",
+      "city": "Luton",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Brothers Dinning Limited",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Chai Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 degrees Limited",
+      "city": "Oxford",
+      "county": "Oxfordshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 EXCEL ENGINEERING LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 FRIENDS PUB COMPANY LTD",
+      "city": "Oldbury,",
+      "county": "West Midlands",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Karaks Ltd",
+      "city": "Luton",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Picardy Road Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Plan Project Management Limited",
+      "city": "Woking",
+      "county": "Surrey",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 SI Limited T/a Tipu Sultan Nottingham",
+      "city": "Nottingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Sisters Food Group Limited",
+      "city": "Wakefield",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2 Sisters Food Group Limited",
+      "city": "Wakefield",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: Senior or Specialist Worker"
+    },
+    {
+      "name": "2:30 Limited",
+      "city": "Corby",
+      "county": "Northamptonshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "20/30 Labs Limited",
+      "city": "Northanpton",
+      "county": "Northamptonshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "200 Degrees Coffee Roasters",
+      "city": "Nottingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "200OK Solutions Ltd",
+      "city": "Stanmore",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "201 ASIAN KITCHEN",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "20-20 Events Management Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2023 RE INVESTMENT MANAGEMENT LIMITED",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2023 RE INVESTMENT MANAGEMENT LIMITED",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: Senior or Specialist Worker"
+    },
+    {
+      "name": "2030 AUTO CARE LIMITED",
+      "city": "Manchester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21 Soho Square Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21 Soho Square Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Temporary Worker (A rating)",
+      "route": "Creative Worker"
+    },
+    {
+      "name": "214 Limited T/A Chai Naasto",
+      "city": "Beckenham",
+      "county": "Kent",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21D Bioengineering Ltd",
+      "city": "Harrogate",
+      "county": "North Yorkshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21ST AMENDMENT LTD",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21st Architecture Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21ST CENTURY CARE (PLYMOUTH) LIMITED",
+      "city": "IVYBRIDGE",
+      "county": "DEVON",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "21st Club Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "22 Hotel Management Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "22cans Ltd.",
+      "city": "GUILDFORD",
+      "county": "Surrey",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "23 Consult Ltd",
+      "city": "Liverpool",
+      "county": "Merseyside",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2399098 Ontario Inc o/a MAK Consulting Group",
+      "city": "High Wycombe",
+      "county": "Bucks",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24 7 Property Maintenance Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24 RT Limited",
+      "city": "Edinburgh",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24 Seven UK Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24/7 Helping Hands Service",
+      "city": "Leicester",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24/7 RETAIL LTD",
+      "city": "Manchester",
+      "county": "United Kingdom",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24/7 Support UK Limited",
+      "city": "Peterborough",
+      "county": "Cambridgeshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 ALLIANCE LTD",
+      "city": "Birmingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 Bluebell Care Ltd",
+      "city": "Luton",
+      "county": "Bedfordshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 CARS (WILLENHALL) LIMITED",
+      "city": "Willenhall",
+      "county": "West Midlands",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 CARS WATFORD LIMITED",
+      "city": "Watford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 Commerce Ltd",
+      "city": "Brentford",
+      "county": "Middlesex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 Homecare Limited",
+      "city": "Swindon",
+      "county": "Wiltshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 IT SERVICES LIMITED",
+      "city": "Hamshire",
+      "county": "Farnborough",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 live in ccompanions",
+      "city": "Brentwood",
+      "county": "Essex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 PEST CONTROL LTD",
+      "city": "Ilford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24-7 Prayer",
+      "city": "Guildford",
+      "county": "Surrey",
+      "type": "Worker (A rating)",
+      "route": "Tier 2 Ministers of Religion"
+    },
+    {
+      "name": "247 SECURITY SOLUTIONS LTD",
+      "city": "Hove, England",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 staffing support ltd",
+      "city": "Kettering",
+      "county": "Northamptonshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "247 TAXI LINE LIMITED",
+      "city": "Milton Keynes",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2-4c",
+      "city": "Brentwood",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24Haymarket Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24HRS HC Home Care Services LTD",
+      "city": "Hudderfield",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24SQ LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "24X7 CHESTER LIMITED",
+      "city": "CREWE",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "25 Cabot Square",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "25 St.Johns Practice Ltd",
+      "city": "Oxford",
+      "county": "Oxon",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "25TH COURIERS LTD",
+      "city": "SWANLEY",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "27@Northgate GP Practice",
+      "city": "Oxford",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "272BIO Ltd",
+      "city": "Uckfield",
+      "county": "East Sussex",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "28 Trading Limited",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "284 SERVICES LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "288 Group Limited",
+      "city": "Poole",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "289 Imaging Ltd, Trading as 'The Ultrasound Clinic'",
+      "city": "Silsoe",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "28b Limited",
+      "city": "Huntingdon",
+      "county": "Cambridgeshire",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "29 Spices",
+      "city": "Bournemouth",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "29 Stoney Street LLP",
+      "city": "Nottingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "29FORWARD Ltd",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2A Link (UK) Limited",
+      "city": "Wokingham",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Global Business Mobility: UK Expansion Worker"
+    },
+    {
+      "name": "2A PRODUCTIONS LIMITED",
+      "city": "London",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2CELL LIMITED",
+      "city": "READING",
+      "county": "BERKSHIRE",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    },
+    {
+      "name": "2CHE DESIGN LTD",
+      "city": "LONDON",
+      "county": "NaN",
+      "type": "Worker (A rating)",
+      "route": "Skilled Worker"
+    }
+  ]
+}
+

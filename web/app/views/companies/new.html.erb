@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <%= form_with model: @company, local: true do |form| %>
+    <div>
+      <%= form.label :title, "name" %>
+      <%= form.text_field :title %>
+    </div>
+  <div>
+    <%= form.label :city, "city" %>
+    <%= form.text_field :city %>
+  </div>
+  <div>
+    <%= form.label :county, "county" %>
+    <%= form.text_field :county %>
+  </div>
+  <div>
+    <%= form.label :route, "route" %>
+    <%= form.text_field :route %>
+  </div>
+  <div>
+    <%= form.submit "Create company" %>
+  </div>
+  <% end %>
+
+<%= link_to 'Back to List', companies_path %>
+</body>
+</html>

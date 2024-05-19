@@ -1,0 +1,100 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+.eggs/
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.pyproj
+.mypy_cache/
+.python-version
+.env
+.venv
+env/
+venv/
+ENV/
+venv.bak/
+venv.bak.tar.gz
+Pipfile
+Pipfile.lock
+celerybeat-schedule
+
+# Virtualenv
+venv/
+ENV/
+
+# Airflow
+airflow.cfg
+airflow.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Kubernetes
+*.yaml
+*.yml
+.kube/
+k8s/
+
+# Docker
+*.log
+docker-compose.override.yml
+docker-compose.*.yml
+**/Dockerfile
+**/docker-compose.yml
+
+# Docker Compose
+.docker/
+
+# Scala
+*.class
+*.log
+*.project
+*.cache
+*.classpath
+*.settings/
+*.target
+lib_managed/
+src_managed/
+project/target/
+target/
+dist/
+
+# Spark
+metastore_db/
+derby.log
+
+# ZincSearch
+# ZincSearch specific ignore files (if any)
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+# Temporary files
+*.swp
+*.swo
+*~

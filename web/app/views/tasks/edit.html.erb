@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Task</title>
+</head>
+<body>
+<h1>Edit Task</h1>
+
+<%= form_with model: @task, local: true do |form| %>
+  <div>
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :completed, "Completed" %>
+    <%= form.check_box :completed %>
+  </div>
+  <div>
+    <%= form.submit "Update Task" %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', task_path(@task) %> |
+<%= link_to 'Back to List', tasks_path %>
+</body>
+</html>
