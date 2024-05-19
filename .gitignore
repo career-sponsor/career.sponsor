@@ -46,7 +46,6 @@ airflow.db
 
 # Kubernetes
 *.yaml
-*.yml
 .kube/
 k8s/
 

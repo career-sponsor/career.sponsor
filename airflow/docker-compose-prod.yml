@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  webserver:
+    image: bgpark82/uk-company-airflow:latest
+    #    networks:
+    #      - minikube
+    volumes:
+      - ./airflow:/opt/airflow # dags 기본 폴더 (/opt/airflow/dags in airflow.cfg)
+      - ./kube_config:/.kube/config:ro # kube_config 연결 (~/.kube/config) (ro: read only)
+      - "${HOME}/.minikube:/.minikube" # cluster 접근 certificate 경로
+    environment:
+      - AIRFLOW__KUBERNETES__KUBE_CONFIG=/.kube/config # airflow.cfg 설정 override하는 variable
+      - AIRFLOW__KUBERNETES__IN_CLUSTER=False # airflow.cfg 설정 override하는 variable
+      - AIRFLOW__LOGGING__LOGGING_LEVEL=DEBUG
+    ports:
+      - "8080:8080"
+    #    command: airflow standalone # run all airflow component (scheduler, worker, webserver)
+    command: bash -c "airflow webserver && airflow scheduler"
+    depends_on:
+      - postgres
+
+#  scheduler:
+#    image: bgpark82/uk-company-airflow:latest
+#    depends_on:
+#      - webserver
+#    environment:
+#      - EXECUTOR=Local
+#      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+#    command: bash -c "airflow db init && airflow scheduler"
+#    restart: always
+
+#networks:
+#  minikube:
+#    external: true
