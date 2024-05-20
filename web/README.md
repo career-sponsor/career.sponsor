@@ -15,6 +15,10 @@ make web-deploy
 ```
 
 2. port forward (prod)
+open screen session to run portforward on background
+```bash
+screen -S portforward 
+```
 - Makefile in project root directory
 - it must have --address 0.0.0.0 option for ec2 instance 
 ```bash
