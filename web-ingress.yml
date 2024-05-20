@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: web-ingress
+  name: ingress
   labels:
-    app: web-ingress
+    app: ingress
 spec:
   rules:
-    - host: "company.visa.com"
+    - host: "localhost"
       http:
         paths:
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               service:
                 name: web
                 port:
-                  number: 80
+                  number: 3000
