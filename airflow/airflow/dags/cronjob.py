@@ -198,7 +198,7 @@ def create_cronjob():
     cronjob = client.V1CronJob(     # client.V1beta1CronJob 대신 client.V1CronJob 사용
         api_version="batch/v1",     # API 버전 변경
         kind="CronJob",
-        metadata=client.V1ObjectMeta(name=f"example-cronjob-{uuid.uuid4()}"), # uuid 추가 안하면 이미 존재하여 conflict 발생
+        metadata=client.V1ObjectMeta(name=f"zincsearch-{uuid.uuid4()}"), # uuid 추가 안하면 이미 존재하여 conflict 발생
         spec=client.V1CronJobSpec(  # V1beta1CronJobSpec 대신 V1CronJobSpec 사용
             schedule="*/5 * * * *",
             job_template=client.V1JobTemplateSpec(
@@ -206,9 +206,10 @@ def create_cronjob():
                     template=client.V1PodTemplateSpec(
                         spec=client.V1PodSpec(
                             containers=[client.V1Container(
-                                name="example-container",
-                                image="busybox",
-                                args=["/bin/sh", "-c", "date; echo Hello from the Kubernetes cluster"],
+                                name="rails-zincsearch",
+                                image="bgpark82/company-visa-web:latest",
+                                image_pull_policy="Always",
+                                command=["bundle", "exec", "rake", "zincsearch:add_documents"]
                             )],
                             restart_policy="OnFailure"
                         )
@@ -231,35 +232,35 @@ dag = DAG(
     start_date=datetime(2023, 1, 1),
     catchup=False)
 
-# create_job = PythonOperator(
-#     task_id='create_kubernetes_cronjob_task',
-#     python_callable=create_cronjob,
-#     execution_timeout=timedelta(minutes=1), # 1분 후 타임아웃
-#     on_failure_callback=on_failure, # 타임 아웃 시 실행하는 콜백
-#     dag=dag)
+create_job = PythonOperator(
+    task_id='create_kubernetes_cronjob_task',
+    python_callable=create_cronjob,
+    execution_timeout=timedelta(minutes=1), # 1분 후 타임아웃
+    on_failure_callback=on_failure, # 타임 아웃 시 실행하는 콜백
+    dag=dag)
 
-download_task = PythonOperator(
-    task_id='download_file',
-    python_callable=download_file,
-    dag=dag,
-)
-
-upload_to_s3_task = PythonOperator(
-    task_id='upload_to_s3',
-    python_callable=upload_to_s3,
-    dag=dag,
-)
-
-run_glue_crawler = PythonOperator(
-    task_id='run_glue_crawler',
-    python_callable=start_glue_crawler,
-    dag=dag
-)
-
-query_and_convert_data_task = PythonOperator(
-    task_id='query_athena_and_convert_to_dict',
-    python_callable=query_athena_and_fetch_data,
-    dag=dag
-)
-
-download_task >> upload_to_s3_task >> run_glue_crawler >> query_and_convert_data_task
+# download_task = PythonOperator(
+#     task_id='download_file',
+#     python_callable=download_file,
+#     dag=dag,
+# )
+#
+# upload_to_s3_task = PythonOperator(
+#     task_id='upload_to_s3',
+#     python_callable=upload_to_s3,
+#     dag=dag,
+# )
+#
+# run_glue_crawler = PythonOperator(
+#     task_id='run_glue_crawler',
+#     python_callable=start_glue_crawler,
+#     dag=dag
+# )
+#
+# query_and_convert_data_task = PythonOperator(
+#     task_id='query_athena_and_convert_to_dict',
+#     python_callable=query_athena_and_fetch_data,
+#     dag=dag
+# )
+#
+# download_task >> upload_to_s3_task >> run_glue_crawler >> query_and_convert_data_task

@@ -49,6 +49,7 @@ airflow.db
 *.yaml
 .kube/
 k8s/
+kube_config
 
 # Docker
 *.log

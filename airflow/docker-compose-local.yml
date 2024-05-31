@@ -9,6 +9,7 @@ services:
       - ./airflow:/opt/airflow # dags 기본 폴더 (/opt/airflow/dags in airflow.cfg)
       - ./kube_config:/.kube/config:ro # kube_config 연결 (~/.kube/config) (ro: read only)
       - "${HOME}/.minikube:/.minikube" # cluster 접근 certificate 경로
+      - ./.kube:/.kube # 외부 k8s api에 연결할 certificate 파일 경로
     environment:
       - AIRFLOW__KUBERNETES__KUBE_CONFIG=/.kube/config # airflow.cfg 설정 override하는 variable
       - AIRFLOW__KUBERNETES__IN_CLUSTER=False # airflow.cfg 설정 override하는 variable
