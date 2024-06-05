@@ -4,6 +4,8 @@ ZINCSEARCH_PORT := 4080
 WEB_LABEL_SELECTOR := web
 WEB_PORT := 3000
 
+start: web-deploy zs-deploy web-pf
+
 # zincsearch deploy
 zs-deploy:
 	kubectl apply -f zincsearch-deployment.yml
