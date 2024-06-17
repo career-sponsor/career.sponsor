@@ -1,9 +1,17 @@
 # Search
 
-using ZincSearch
+## Elasticsearch
+**Run**
+```
+docker-compose up -d
+```
+
+
+
+## ZincSearch (deprecated)
 - https://zincsearch-docs.zinc.dev/
 
-## Run
+**Run**
 1. run zincsearch-deployment.yml (local, prod)
 - Makefile in project root directory
 ```bash

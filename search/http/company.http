@@ -1,24 +1,37 @@
 ### search document
-POST {{host}}/api/companies/_search
+POST {{host}}/companies/_search
 Content-Type: application/json
-Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
 {
-  "search_type": "match",
   "query": {
-    "term": "Limited",
-    "field": "_all"
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "city": "Atherstone"
+          }
+        },
+        {
+          "match": {
+            "name": "limited"
+          }
+        }
+      ]
+    }
   },
   "from": 0,
-  "max_results": 20,
-  "_source": [
-  ]
+  "size": 10,
+  "highlight": {
+    "fields": {
+      "name": {},
+      "city": {}
+    }
+  }
 }
 
 ### create index
-POST {{host}}/api/index
+POST {{host}}/companies/index
 Content-Type: application/json
-Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
 {
   "name": "companies",
@@ -73,9 +86,8 @@ Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 }
 
 ### create document
-POST {{host}}/api/companies/_doc
+POST {{host}}/companies/_doc
 Content-Type: application/json
-Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
 {
   "name": "Aldi Stores Limited",
@@ -86,10 +98,8 @@ Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 }
 
 ### create bulk document
-### https://zincsearch-docs.zinc.dev/api/document/bulkv2/
-POST {{host}}/api/_bulkv2
+POST {{host}}/_bulk
 Content-Type: application/json
-Authorization: Basic YWRtaW46Q29tcGxleHBhc3MjMTIz
 
 {
   "index": "companies",

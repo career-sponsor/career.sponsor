@@ -99,3 +99,9 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 *~
+
+# nginx
+nginx/minikube
+
+# elasticsearch
+search/data

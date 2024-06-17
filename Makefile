@@ -1,18 +1,18 @@
-ZINCSEARCH_LABEL_SELECTOR := zincsearch
-ZINCSEARCH_PORT := 4080
+ELASTICSEARCH_LABEL_SELECTOR := elasticsearch
+ELASTICSEARCH_PORT := 9200
 
 WEB_LABEL_SELECTOR := web
 WEB_PORT := 3000
 
-start: web-deploy zs-deploy web-pf
+start: web-deploy es-deploy web-pf
 
-# zincsearch deploy
-zs-deploy:
-	kubectl apply -f zincsearch-deployment.yml
-	kubectl apply -f zincsearch-pvc.yml
+# elasticsearch deploy
+es-deploy:
+	kubectl apply -f es-deployment.yml
+	kubectl apply -f es-pvc.yml
 
-# zincsearch portforward
-zs-pf:
+# elasticsearch portforward
+es-pf:
 	@echo "Finding pod with label $(ZINCSEARCH_LABEL_SELECTOR)..."
 	@POD_NAME=$$(kubectl get pods -l app=$(ZINCSEARCH_LABEL_SELECTOR)  -o jsonpath='{.items[0].metadata.name}'); \
 	echo "Port forwarding to pod: $$POD_NAME"; \
