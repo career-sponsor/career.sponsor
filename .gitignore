@@ -55,8 +55,6 @@ kube_config
 *.log
 docker-compose.override.yml
 docker-compose.*.yml
-**/Dockerfile
-**/docker-compose.yml
 
 # Docker Compose
 .docker/
