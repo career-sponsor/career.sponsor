@@ -9,6 +9,14 @@
 - [Search](./search/README.md)
 - [Web](./web/README.md)
 
+## Environment Setup
+1. airflow
+    - `.kube`
+    - `.env`
+    - `kube_config`
+2. nginx
+   - `minikube`
+
 ## Minikube Dashboard
 1. run dashboard
 ```bash
