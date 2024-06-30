@@ -4,7 +4,6 @@
 *.iml
 *.ipr
 out/
-http-client.env.json
 
 # Python
 __pycache__/

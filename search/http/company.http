@@ -29,6 +29,26 @@ Content-Type: application/json
   }
 }
 
+### search document
+POST {{host}}/companies/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "name": "limited"
+          }
+        }
+      ]
+    }
+  },
+  "from": 0,
+  "size": 10
+}
+
 ### create index
 POST {{host}}/companies/index
 Content-Type: application/json
