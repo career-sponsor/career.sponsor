@@ -8,7 +8,11 @@ import {
   TableRow,
 } from "components/table";
 
-const SearchResultTable = () => {
+interface Props {
+  searchResults: any;
+}
+
+const SearchResultTable = ({ searchResults }: Props) => {
   return (
     <Table className="min-w-full bg-white">
       <TableCaption>A list of companies</TableCaption>
@@ -22,13 +26,15 @@ const SearchResultTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">ABC company</TableCell>
-          <TableCell>London</TableCell>
-          <TableCell>London</TableCell>
-          <TableCell>Worker</TableCell>
-          <TableCell className="text-right">Skilled Worker</TableCell>
-        </TableRow>
+        {searchResults.content.map((result: any) => (
+          <TableRow key={result.name}>
+            <TableCell className="font-medium">{result.name}</TableCell>
+            <TableCell>{result.city}</TableCell>
+            <TableCell>{result.county}</TableCell>
+            <TableCell>{result.type}</TableCell>
+            <TableCell className="text-right">{result.route}</TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );
