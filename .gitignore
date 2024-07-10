@@ -40,6 +40,9 @@ ENV/
 # Airflow
 airflow.cfg
 airflow.db
+airflow-webserver.pid
+airflow/logs
+standalone_admin_password.txt
 
 # Jupyter Notebooks
 .ipynb_checkpoints
@@ -102,3 +105,10 @@ nginx/minikube
 
 # elasticsearch
 search/data
+
+# gradle
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/

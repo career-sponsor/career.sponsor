@@ -31,6 +31,11 @@ services:
   #      POSTGRES_PASSWORD: password
   #      POSTGRES_DB: myapp_development
 
+  api:
+    build: api
+    ports:
+      - "8081:8081"
+
   web:
     build: ./web
     command: bash -c "rm -f /myapp/tmp/pids/server.pid &&  bin/rails db:create db:migrate && rails server -b 0.0.0.0"

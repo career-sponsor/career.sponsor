@@ -5,46 +5,23 @@ Content-Type: application/json
 {
   "query": {
     "bool": {
-      "must": [
+      "must": {
+        "match": {
+          "name": "Shellfish"
+        }
+      },
+      "filter": [
         {
           "match": {
-            "city": "Atherstone"
-          }
-        },
-        {
-          "match": {
-            "name": "limited"
+            "city": "Ballymena"
           }
         }
       ]
     }
   },
-  "from": 0,
-  "size": 10,
-  "highlight": {
-    "fields": {
-      "name": {},
-      "city": {}
-    }
-  }
-}
-
-### search document
-POST {{host}}/companies/_search
-Content-Type: application/json
-
-{
-  "query": {
-    "bool": {
-      "must": [
-        {
-          "match": {
-            "name": "limited"
-          }
-        }
-      ]
-    }
-  },
+  "sort": [
+    { "name.keyword": { "order": "asc" } }
+  ],
   "from": 0,
   "size": 10
 }
@@ -54,56 +31,41 @@ POST {{host}}/companies/index
 Content-Type: application/json
 
 {
-  "name": "companies",
-  "storage_type": "disk",
-  "shard_num": 1,
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
   "mappings": {
     "properties": {
       "name": {
         "type": "text",
-        "index": true,
-        "store": true,
-        "highlightable": true
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
       },
       "city": {
-        "type": "text",
-        "index": true,
-        "store": true,
-        "highlightable": true
+        "type": "keyword"
       },
       "county": {
-        "type": "text",
-        "index": true,
-        "sortable": true,
-        "highlightable": true
+        "type": "keyword"
       },
       "type": {
-        "type": "keyword",
-        "index": true,
-        "sortable": true,
-        "aggregatable": true
+        "type": "keyword"
       },
       "route": {
-        "type": "keyword",
-        "index": true,
-        "sortable": true,
-        "aggregatable": true
-      }
-    }
-  },
-  "settings": {
-    "analysis": {
-      "analyzer": {
-        "default": {
-          "type": "standard"
-        },
-        "my_analyzer": {
-          "tokenizer": "standard"
-        }
+        "type": "keyword"
       }
     }
   }
 }
+
+### get index
+GET {{host}}/companies
+
+### delete index
+DELETE {{host}}/companies
 
 ### create document
 POST {{host}}/companies/_doc
@@ -115,6 +77,31 @@ Content-Type: application/json
   "county": "Warwickshire",
   "type": "Worker (A rating)",
   "route": "Global Business Mobility: Senior or Specialist Worker"
+}
+
+### create document
+POST {{host}}/companies/_doc
+Content-Type: application/json
+
+{
+  "name": "McMullan Shellfish",
+  "city": "Ballymena",
+  "county": "Co Antrim",
+  "type": "Worker (A rating)",
+  "route": "Skilled Worker"
+}
+
+
+### create document
+POST {{host}}/companies/_doc
+Content-Type: application/json
+
+{
+  "name": "A Shellfish",
+  "city": "Ballymena",
+  "county": "Co Antrim",
+  "type": "Worker (A rating)",
+  "route": "Skilled Worker"
 }
 
 ### create bulk document
