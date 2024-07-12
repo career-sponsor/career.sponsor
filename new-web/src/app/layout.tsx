@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "lib/styles/globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { GTM_ID } from "lib/env";
+import { ReactQueryProvider } from "components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleTagManager gtmId={GTM_ID} />
-      <body className={inter.className}>{children}</body>
+      <ReactQueryProvider>
+        <body className={inter.className}>{children}</body>
+      </ReactQueryProvider>
     </html>
   );
 }
