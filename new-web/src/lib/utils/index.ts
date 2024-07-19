@@ -1,2 +1,2 @@
-export * from "./createQueryString";
+export * from "./create-query-string";
 export * from "./utils";
