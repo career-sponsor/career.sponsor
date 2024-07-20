@@ -4,6 +4,7 @@ import "lib/styles/globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { GTM_ID } from "lib/env";
 import { ReactQueryProvider } from "components";
+import { MSWComponent } from "mocks/msw-component";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <GoogleTagManager gtmId={GTM_ID} />
       <ReactQueryProvider>
-        <body className={inter.className}>{children}</body>
+        <MSWComponent>
+          <body className={inter.className}>{children}</body>
+        </MSWComponent>
       </ReactQueryProvider>
     </html>
   );
