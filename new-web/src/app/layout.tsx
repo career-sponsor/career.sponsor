@@ -21,11 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleTagManager gtmId={GTM_ID} />
-      <ReactQueryProvider>
+      <body className={inter.className}>
         <MSWComponent>
-          <body className={inter.className}>{children}</body>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </MSWComponent>
-      </ReactQueryProvider>
+      </body>
     </html>
   );
 }
