@@ -6,6 +6,12 @@ WEB_PORT := 3000
 
 start: web-deploy es-deploy web-pf
 
+test:
+	docker-comopse -f docker-compose-local.yml up
+
+deploy:
+	docker-compose -f docker-compose-prod.yml up
+
 # elasticsearch deploy
 es-deploy:
 	kubectl apply -f es-deployment.yml
