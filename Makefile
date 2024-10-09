@@ -1,3 +1,6 @@
+SHELL := /bin/zsh
+JAVA_HOME := $(/usr/libexec/java_home -v 21)
+
 ELASTICSEARCH_LABEL_SELECTOR := elasticsearch
 ELASTICSEARCH_PORT := 9200
 
@@ -6,11 +9,14 @@ WEB_PORT := 3000
 
 start: web-deploy es-deploy web-pf
 
-test:
-	docker-comopse -f docker-compose-local.yml up
+build:
+	cd api && ./gradlew clean build
 
-deploy:
-	docker-compose -f docker-compose-prod.yml up
+test: build
+	docker-comopse -f docker-compose-local.yml up --build
+
+deploy: build
+	docker-compose -f docker-compose-prod.yml up --build
 
 # elasticsearch deploy
 es-deploy:
