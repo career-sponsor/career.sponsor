@@ -1,4 +1,3 @@
-SHELL := /bin/zsh
 JAVA_HOME := $(/usr/libexec/java_home -v 21)
 
 ELASTICSEARCH_LABEL_SELECTOR := elasticsearch
