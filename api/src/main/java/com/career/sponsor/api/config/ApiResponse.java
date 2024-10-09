@@ -1,9 +1,6 @@
-package com.career.sponsor.api;
+package com.career.sponsor.api.config;
 
 import lombok.*;
-
-import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter

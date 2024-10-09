@@ -1,12 +1,14 @@
-package com.career.sponsor.api.company.controller;
+package com.career.sponsor.api.company;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
+@ToString
 public class CompanySearchResponse {
 
     private String name;

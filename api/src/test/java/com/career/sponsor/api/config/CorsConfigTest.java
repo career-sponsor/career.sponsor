@@ -20,9 +20,8 @@ class CorsConfigTest {
 
     @Test
     void testCorsHeader() throws Exception {
-        mvc.perform(get("/api/v1/companies/search")
+        mvc.perform(get("/api/v1/health")
                 .header("Origin", "http://localhost:8080"))
                 .andExpect(status().isOk());
-
     }
 }
