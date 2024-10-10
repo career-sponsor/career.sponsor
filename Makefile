@@ -12,7 +12,7 @@ build:
 	cd api && ./gradlew clean build
 
 test: build
-	docker-comopse -f docker-compose-local.yml up --build
+	docker-compose -f docker-compose-local.yml up --build
 
 deploy: build
 	docker-compose -f docker-compose-prod.yml up --build

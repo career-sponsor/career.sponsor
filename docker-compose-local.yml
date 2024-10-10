@@ -35,6 +35,8 @@ services:
     build: api
     ports:
       - "8081:8081"
+      - "9010:9010"
+      - "1099:1099"
 
 #  web:
 #    build: ./web
