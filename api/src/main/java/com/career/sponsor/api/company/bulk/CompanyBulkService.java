@@ -10,6 +10,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,13 +18,19 @@ import java.util.Map;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class CompanyBulkService {
 
     private static final String INDEX_NAME = "companies";
 
     private final RestHighLevelClient client;
     private final CompanyReader reader;
+
+    public CompanyBulkService(
+            RestHighLevelClient client,
+            @Qualifier("companyS3CsvReader") CompanyReader reader) {
+        this.client = client;
+        this.reader = reader;
+    }
 
     public void bulkInsert() {
         Iterable<Map<String, Object>> records = reader.read();
